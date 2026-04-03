@@ -17,6 +17,7 @@ int main(void){
     int playerrow;
     float playerangle;
     int playerdir=1;
+    ray
     SDL_Init(SDL_INIT_VIDEO);
     SDL_Window* window=SDL_CreateWindow("fuckass fractal",SDL_WINDOWPOS_CENTERED,SDL_WINDOWPOS_CENTERED,1280,720,SDL_WINDOW_SHOWN);
     SDL_Renderer* renderer=SDL_CreateRenderer(window,-1,0);
@@ -84,7 +85,25 @@ int main(void){
 
 
             }
-        }SDL_RenderClear(renderer);
+        }
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        SDL_RenderClear(renderer);
 
 
 
