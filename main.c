@@ -51,9 +51,13 @@ int main(void){
                 int mouserat=mousex/1280.0;
                 playerangle=mouserat*360;
                 if(playerangle==0){
-                    printf("you facing left");
+                    printf("you facing east");
                 }else if(playerangle==90){
-                    printf("you facing right");
+                    printf("you facing north");
+                }else if(playerangle==180){
+                    printf("you facing west");
+                }else if(playerangle==360){
+                    printf("you facing south");
                 }
 
 
