@@ -97,7 +97,7 @@ int main(void){
             while(damap[(int)doty][(int)dotx]==0){
                 dotx+=raydirx*0.01f;
                 doty+=raydiry*0.01f;
-                if(dotx < 0 || dotx >= 10 || doty < 0 || doty >= 10) break;
+                if(dotx<0 || dotx>=10 || doty<0 || doty>=10) break;
                 
             }
             float d=sqrt((pow((dotx-playerx),2)+pow(doty-playery,2)));
