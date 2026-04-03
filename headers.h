@@ -4,6 +4,7 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_ttf.h>
 #include <SDL2/SDL_image.h>
+#include <math.h>
 
 int damap[10][10] = {{1,1,1,1,1,1,1,1,1,1},
                         {1,0,0,0,0,0,0,0,0,1},

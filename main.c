@@ -8,7 +8,7 @@
 
 
 #include "headers.h"
-
+#define FOV (3.14f / 3.0f)
 
 int main(void){
     float playerx=5.5f;
@@ -17,7 +17,6 @@ int main(void){
     int playerrow;
     float playerangle;
     int playerdir=1;
-    ray
     SDL_Init(SDL_INIT_VIDEO);
     SDL_Window* window=SDL_CreateWindow("fuckass fractal",SDL_WINDOWPOS_CENTERED,SDL_WINDOWPOS_CENTERED,1280,720,SDL_WINDOW_SHOWN);
     SDL_Renderer* renderer=SDL_CreateRenderer(window,-1,0);
@@ -70,7 +69,7 @@ int main(void){
             }else if (event.type==SDL_MOUSEMOTION){
                 int mousex=event.motion.x;
                 float mouserat=(float)mousex/1280.0f;
-                playerangle=mouserat*360;
+                playerangle=mouserat*2*(3.14f);
                 if(0<=playerangle && playerangle<90){
                     playerdir=1;
                 }else if(90<=playerangle && playerangle<=180){
@@ -85,6 +84,34 @@ int main(void){
 
 
             }
+        
+        }
+        SDL_SetRenderDrawColor(renderer,0,0,0,255);
+        SDL_RenderClear(renderer);
+        for(int h=0;h<1280;h++){
+            float dotx=playerx;
+            float doty=playery;
+            float rayangle = playerangle + (h-640)*(FOV/1280); 
+            float raydirx=cos(rayangle);
+            float raydiry=sin(rayangle);
+            while(damap[(int)doty][(int)dotx]==0){
+                dotx+=raydirx*0.01f;
+                doty+=raydiry*0.01f;
+                if(dotx < 0 || dotx >= 10 || doty < 0 || doty >= 10) break;
+                
+            }
+            float d=sqrt((pow((dotx-playerx),2)+pow(doty-playery,2)));
+            float his= (float)(720/d);
+            float top=360+his/2;
+            float bottom=360-his/2;
+            SDL_SetRenderDrawColor(renderer,255,255,255,255);
+            SDL_RenderDrawLine(renderer,h,top,h,bottom);
+
+            
+
+
+
+
         }
         
         
@@ -103,7 +130,7 @@ int main(void){
         
         
         
-        SDL_RenderClear(renderer);
+        
 
 
 
