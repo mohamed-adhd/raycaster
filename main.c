@@ -6,7 +6,7 @@
 
 
 
-
+// raycasting was such a beautiful concept , yet , its not enough , yes it was difficult , and the dda conceptas well , which i m gonna add , but they re not challenging enough to satisfy..
 #include "headers.h"
 #define FOV (3.14f / 2.9f)
 
@@ -26,16 +26,56 @@ int main(void){
         playercol=(int)playerx;
         playerrow=(int)playery;
         while(SDL_PollEvent(&event)){
-            
+
             if (event.type==SDL_QUIT){
                 running=false;
             }else if(event.type==SDL_KEYDOWN){
                 SDL_Keycode key=event.key.keysym.sym;
                 if(key==SDLK_UP){
-                    int nextrow = (int)(playery - 0.1f);
-                    if(damap[nextrow][playercol]==0){
-                        playery-=0.1;
-                    }
+                    
+                    if(playerdir==1){
+                        int nextcol = (int)(playerx + 0.1f);
+                        if(damap[playerrow][nextcol]==0){
+                        playerx+=0.1;}
+                    }else if (playerdir==2){
+                        int nextrow = (int)(playery - 0.1f);
+                        if(damap[nextrow][playercol]==0){
+                            playery-=0.1;}
+                    }else if(playerdir==3){
+                        int nextcol = (int)(playerx - 0.1f);
+                        if(damap[playerrow][nextcol]==0){
+                        playerx-=0.1;}
+                    }else if (playerdir==4){
+                        int nextrow = (int)(playery + 0.1f);
+                        if(damap[nextrow][playercol]==0){
+                            playery+=0.1;}}
+                    
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
                 }else if(key==SDLK_DOWN){
                     if(damap[playerrow+1][playercol]==0){
                         playery+=0.1;
@@ -70,13 +110,13 @@ int main(void){
                 int mousex=event.motion.x;
                 float mouserat=(float)mousex/1280.0f;
                 playerangle=mouserat*2*(3.14f);
-                if(0<=playerangle && playerangle<90){
+                if(0<=playerangle && playerangle<((3.14f)/2)){
                     playerdir=1;
-                }else if(90<=playerangle && playerangle<=180){
+                }else if(((3.14f)/2)<=playerangle && playerangle<=(3.14f)){
                     playerdir=2;
-                }else if(180<=playerangle && playerangle<=270){
+                }else if((3.14f)<=playerangle && playerangle<=(3*(3.14f)/2)){
                     playerdir=3;
-                }else if(270<=playerangle && playerangle<=360){
+                }else if((3*(3.14f)/2)<=playerangle && playerangle<=2*(3.14f)){
                     playerdir=4;
                 }
 
@@ -114,7 +154,7 @@ int main(void){
 
         }
         
-        
+    
         
         
         
