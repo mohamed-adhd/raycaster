@@ -8,7 +8,7 @@
 
 
 #include "headers.h"
-#define FOV (3.14f / 3.0f)
+#define FOV (3.14f / 2.9f)
 
 int main(void){
     float playerx=5.5f;
