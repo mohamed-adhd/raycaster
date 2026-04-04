@@ -137,49 +137,11 @@ int main(void){
                 
             }
             float d=sqrt((pow((dotx-playerx),2)+pow(doty-playery,2)));
-            printf("%d",d);
             float his= (float)(720/d);
             float top=360-his/2;
             float bottom=360+his/2;
-            if(d<=0.5f){
-                SDL_SetRenderDrawColor(renderer,255,255,255,255);
-            }else if (0.5f<d && d<=1.0f){
-                SDL_SetRenderDrawColor(renderer,248,248,248,255);
-            }else if (1.0f<d && d<=1.5f){
-                SDL_SetRenderDrawColor(renderer,240,240,240,255);
-            }else if (1.5f<d && d<=2.0f){
-                SDL_SetRenderDrawColor(renderer,225,225,225,255);
-            }else if (2.0f<d && d<=2.5f){
-                SDL_SetRenderDrawColor(renderer,210,210,210,255);
-            }else if (2.5f<d && d<=3.0f){
-                SDL_SetRenderDrawColor(renderer,195,195,195,255);
-            }else if (3.0f<d && d<=3.5f){
-                SDL_SetRenderDrawColor(renderer,180,180,180,255);
-            }else if (3.5f<d && d<=4.0f){
-                SDL_SetRenderDrawColor(renderer,165,165,165,255);
-            }else if (4.0f<d && d<=4.5f){
-                SDL_SetRenderDrawColor(renderer,150,150,150,255);
-            }else if (4.5f<d && d<=5.0f){
-                SDL_SetRenderDrawColor(renderer,135,135,135,255);
-            }else if (5.0f<d && d<=5.5f){
-                SDL_SetRenderDrawColor(renderer,120,120,120,255);
-            }else if (5.5f<d && d<=6.0f){
-                SDL_SetRenderDrawColor(renderer,105,105,105,255);
-            }else if (6.0f<d && d<=6.5f){
-                SDL_SetRenderDrawColor(renderer,90,90,90,255);
-            }else if (6.5f<d && d<=7.0f){
-                SDL_SetRenderDrawColor(renderer,75,75,75,255);
-            }else if (7.0f<d && d<=7.5f){
-                SDL_SetRenderDrawColor(renderer,60,60,60,255);
-            }else if (7.5f<d && d<=8.0f){
-                SDL_SetRenderDrawColor(renderer,45,45,45,255);
-            }else if (8.0f<d && d<=8.5f){
-                SDL_SetRenderDrawColor(renderer,30,30,30,255);
-            }else if (8.5f<d && d<=9.0f){
-                SDL_SetRenderDrawColor(renderer,15,15,15,255);
-            }else if (9.0f<d){
-                SDL_SetRenderDrawColor(renderer,0,0,0,255);
-            }
+            float brightness = 255.0f / (1.0f +d*d+2.0f);
+            SDL_SetRenderDrawColor(renderer,brightness,brightness,brightness,255); 
             SDL_RenderDrawLine(renderer,h,top,h,bottom);
 
             
