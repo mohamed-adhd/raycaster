@@ -72,20 +72,6 @@ int main(void){
                         playery=nexty;
                         playerx=nextx;}
 
-                }else if (key==SDLK_SPACE){
-                    if(playerdir==1){
-                        printf("you facing east");
-                    
-                    }else if(playerdir==2){
-                        printf("you facing north");
-                        
-                    }else if(playerdir==3){
-                        printf("you facing west");
-                        
-                    }else if(playerdir==4){
-                        printf("you facing south");
-                    
-                }
                 }
             }else if (event.type==SDL_MOUSEMOTION){
                 int mousex=event.motion.x;
