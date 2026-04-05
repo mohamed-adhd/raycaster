@@ -41,19 +41,36 @@ int main(void){
                         playery=nexty;
                         playerx=nextx;}
                 }else if(key==SDLK_DOWN){
-                    if(damap[playerrow+1][playercol]==0){
-                        playery+=0.1;
-                    }
-
+                     
+                    
+                    float nextx = playerx - cos(playerangle) * 0.1f;
+                    float nexty = playery - sin(playerangle) * 0.1f; 
+                    
+                    
+                    if(damap[(int)(nexty)][(int)(nextx)]==0){
+                        playery=nexty;
+                        playerx=nextx;}
                 }else if(key==SDLK_LEFT){
-                    if(damap[playerrow][playercol-1]==0){
-                        playerx-=0.1;
-                    }
+                    
+                    
+                    float nextx = playerx + cos(playerangle-3.14f/2) * 0.1f;
+                    float nexty = playery + sin(playerangle-3.14f/2) * 0.1f; 
+                    
+                    
+                    if(damap[(int)(nexty)][(int)(nextx)]==0){
+                        playery=nexty;
+                        playerx=nextx;}
 
                 }else if(key==SDLK_RIGHT){
-                    if(damap[playerrow][playercol+1]==0){
-                        playerx+=0.1;
-                    }
+                    
+                    
+                    float nextx = playerx + cos(playerangle+3.14f/2) * 0.1f;
+                    float nexty = playery + sin(playerangle+3.14f/2) * 0.1f; 
+                    
+                    
+                    if(damap[(int)(nexty)][(int)(nextx)]==0){
+                        playery=nexty;
+                        playerx=nextx;}
 
                 }else if (key==SDLK_SPACE){
                     if(playerdir==1){
@@ -112,7 +129,7 @@ int main(void){
             float his= (float)(720/d);
             float top=360-his/2;
             float bottom=360+his/2;
-            float brightness = 255.0f / (1.0f +d*d+2.0f);
+            float brightness = 255.0f / (1.0f +d*d*2.0f);
             SDL_SetRenderDrawColor(renderer,brightness,brightness,brightness,255); 
             SDL_RenderDrawLine(renderer,h,top,h,bottom);
 
