@@ -77,15 +77,7 @@ int main(void){
                 int mousex=event.motion.x;
                 float mouserat=(float)mousex/1280.0f;
                 playerangle=mouserat*2*(3.14f);
-                if(0<=playerangle && playerangle<((3.14f)/2)){
-                    playerdir=1;
-                }else if(((3.14f)/2)<=playerangle && playerangle<=(3.14f)){
-                    playerdir=2;
-                }else if((3.14f)<=playerangle && playerangle<=(3*(3.14f)/2)){
-                    playerdir=3;
-                }else if((3*(3.14f)/2)<=playerangle && playerangle<=2*(3.14f)){
-                    playerdir=4;
-                }
+                
                 
 
 
