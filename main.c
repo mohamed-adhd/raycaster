@@ -97,9 +97,18 @@ int main(void){
             float rayangle = playerangle + (h-640)*(FOV/1280); 
             float raydirx=cos(rayangle);
             float raydiry=sin(rayangle);
+            int side
             while(damap[(int)doty][(int)dotx]==0){
-                dotx+=raydirx*0.01f;
-                doty+=raydiry*0.01f;
+                int next_vertical=floor(dotx);
+                int next_horizontal=floor(doty);
+                if(next_vertical<next_horizontal){
+                    dotx=next_vertical;
+
+
+                }else{
+                    doty=next_horizontal;
+                }
+                
                 if(dotx<0 || dotx>=10 || doty<0 || doty>=10) break;
                 
             }
