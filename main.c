@@ -91,22 +91,27 @@ int main(void){
         
         for(int h=0;h<1280;h++){
 
-            
+            int mapx=(int)(playerx),mapy=(int)(playery);
             float dotx=playerx;
             float doty=playery;
             float rayangle = playerangle + (h-640)*(FOV/1280); 
             float raydirx=cos(rayangle);
             float raydiry=sin(rayangle);
-            int side
+            float sidedestx=(floor(playerx)+1 -playerx)/raydirx;
+            float sidedesty=(floor(playery)+1 -playery)/raydiry;
+            float deltadistx = 1.0f / fabs(raydirx);
+            float deltadisty = 1.0f / fabs(raydiry);
             while(damap[(int)doty][(int)dotx]==0){
                 int next_vertical=floor(dotx);
                 int next_horizontal=floor(doty);
-                if(next_vertical<next_horizontal){
-                    dotx=next_vertical;
+                if(sidedesty<sidedestx){
+                    dotx+=sidedestx;
+                    sidedestx+=deltadistx;
 
 
                 }else{
-                    doty=next_horizontal;
+                    doty+=sidedesty;
+                    sidedesty+=deltadisty;
                 }
                 
                 if(dotx<0 || dotx>=10 || doty<0 || doty>=10) break;
