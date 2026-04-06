@@ -94,30 +94,50 @@ int main(void){
             int mapx=(int)(playerx),mapy=(int)(playery);
             float dotx=playerx;
             float doty=playery;
+            int hitside;
             float rayangle = playerangle + (h-640)*(FOV/1280); 
             float raydirx=cos(rayangle);
             float raydiry=sin(rayangle);
             float sidedestx=(floor(playerx)+1 -playerx)/raydirx;
             float sidedesty=(floor(playery)+1 -playery)/raydiry;
+            if(raydirx<=0){
+                 sidedestx=(floor(playerx) -playerx)/raydirx;
+            }else{
+                 sidedestx=(floor(playerx)+1 -playerx)/fabs(raydirx);
+            }
+            if(raydiry<=0){
+                 sidedesty=(floor(playery) -playery)/raydiry;
+            }else{
+                 sidedesty=(floor(playery)+1 -playery)/fabs(raydiry);
+            }
+            
             float deltadistx = 1.0f / fabs(raydirx);
             float deltadisty = 1.0f / fabs(raydiry);
-            while(damap[(int)doty][(int)dotx]==0){
-                int next_vertical=floor(dotx);
-                int next_horizontal=floor(doty);
+            int stepx = (raydirx >= 0) ? 1 : -1;
+            int stepy = (raydiry >= 0) ? 1 : -1;
+            while(damap[mapy][mapx]==0){
+
                 if(sidedesty<sidedestx){
-                    dotx+=sidedestx;
-                    sidedestx+=deltadistx;
+                    mapy+=stepy;
+                    sidedesty+=deltadisty;
+                    hitside=1;
 
 
                 }else{
-                    doty+=sidedesty;
-                    sidedesty+=deltadisty;
+                    mapx+=stepx;
+                    sidedestx+=deltadistx;
+                    hitside=0;
                 }
                 
-                if(dotx<0 || dotx>=10 || doty<0 || doty>=10) break;
+                if(mapx<0 || mapx>=10 || mapy<0 || mapy>=10) break;
                 
             }
-            float d=sqrt((pow((dotx-playerx),2)+pow(doty-playery,2)));
+            float d;
+            if (hitside==0){
+                d=sidedestx-deltadistx;
+            }else if (hitside==1){
+                d=sidedesty-deltadisty;
+            }
             float his= (float)(720/d);
             float top=360-his/2;
             float bottom=360+his/2;
