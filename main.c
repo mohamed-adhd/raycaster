@@ -25,6 +25,24 @@ int main(void){
     SDL_Event event;
     SDL_Surface* surf=IMG_Load("backrooms.png");
     SDL_Texture* tex=SDL_CreateTextureFromSurface(renderer,surf);
+    SDL_Surface* surfcar=IMG_Load("car.png");
+    SDL_Texture* texcar=SDL_CreateTextureFromSurface(renderer,surfcar);
+    SDL_Surface* whs=IMG_Load("wh.png");
+    SDL_Texture* wht=SDL_CreateTextureFromSurface(renderer,whs);
+
+
+
+    SDL_Surface* whls=IMG_Load("whl.png");
+    SDL_Texture* whlt=SDL_CreateTextureFromSurface(renderer,whls);
+
+
+
+    SDL_Surface* whrs=IMG_Load("whr.png");
+    SDL_Texture* whrt=SDL_CreateTextureFromSurface(renderer,whrs);
+    int carw,carh;
+    SDL_QueryTexture(tex, NULL, NULL, &carw, &carh);
+    SDL_Rect rect={0,0,1280,720};
+    SDL_Rect wh={400,300,100,100};
     int texw,texh;
     SDL_QueryTexture(tex, NULL, NULL, &texw, &texh);
     SDL_ShowCursor(SDL_DISABLE ); 
@@ -195,7 +213,10 @@ int main(void){
 
 
 
-
+        
+        SDL_RenderCopy(renderer, texcar, &rect, NULL);
+        SDL_RenderCopy(renderer, wht, NULL, &wh);
+        
 
         playercol=(int)playerx;
         playerrow=(int)playery;
