@@ -18,10 +18,17 @@ int main(void){
     float playerangle;
     int playerdir=1;
     SDL_Init(SDL_INIT_VIDEO);
+    IMG_Init(IMG_INIT_PNG);
     SDL_Window* window=SDL_CreateWindow("fuckass fractal",SDL_WINDOWPOS_CENTERED,SDL_WINDOWPOS_CENTERED,1280,720,SDL_WINDOW_SHOWN);
     SDL_Renderer* renderer=SDL_CreateRenderer(window,-1,0);
     bool running=true;
     SDL_Event event;
+    SDL_Surface* surf=IMG_Load("backrooms.png");
+    SDL_Texture* tex=SDL_CreateTextureFromSurface(renderer,surf);
+    int texw,texh;
+    SDL_QueryTexture(tex, NULL, NULL, &texw, &texh);
+
+
     while (running){
         playercol=(int)playerx;
         playerrow=(int)playery;
@@ -138,12 +145,24 @@ int main(void){
             }else if (hitside==1){
                 d=sidedesty-deltadisty;
             }
-            float his= (float)(720/d);
+            float wallx;
+            if(hitside==0){
+                wallx=playery+d*raydiry; 
+
+            }else{wallx=playerx+d*raydirx; }
+            wallx-=floor(wallx);
+            int his=720.0/d;
             float top=360-his/2;
             float bottom=360+his/2;
+            int texx=(int)(wallx*texw);
+            SDL_Rect rec={texx,0,1,texh};
+            SDL_Rect dst={h,top,1,bottom-top};
             float brightness = 255.0f / (1.0f +d*d*2.0f);
-            SDL_SetRenderDrawColor(renderer,brightness,brightness,brightness,255); 
-            SDL_RenderDrawLine(renderer,h,top,h,bottom);
+            SDL_SetTextureColorMod(tex,brightness,brightness,brightness);
+            SDL_RenderCopy(renderer, tex, &rec, &dst);
+            
+            
+
 
             
 
