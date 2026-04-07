@@ -11,8 +11,8 @@
 #define FOV (3.14f / 2.5f)
 
 int main(void){
-    float playerx = 5.5f;
-    float playery= 5.5f;
+    float playerx = 1.5f;
+    float playery= 1.5f;
     int playercol;
     int playerrow;
     float playerangle;
@@ -27,7 +27,8 @@ int main(void){
     SDL_Texture* tex=SDL_CreateTextureFromSurface(renderer,surf);
     int texw,texh;
     SDL_QueryTexture(tex, NULL, NULL, &texw, &texh);
-
+    SDL_ShowCursor(SDL_DISABLE ); 
+    SDL_SetRelativeMouseMode(SDL_TRUE); 
 
     while (running){
         playercol=(int)playerx;
@@ -81,9 +82,8 @@ int main(void){
 
                 }
             }else if (event.type==SDL_MOUSEMOTION){
-                int mousex=event.motion.x;
-                float mouserat=(float)mousex/1280.0f;
-                playerangle=mouserat*2*(3.14f);
+                
+                playerangle+=event.motion.xrel*0.003;
                 
                 
 
