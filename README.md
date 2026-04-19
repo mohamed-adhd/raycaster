@@ -172,7 +172,11 @@ gcc main.c -o raycaster -lSDL2 -lSDL2_image -lm
 
 ## 📸 Demo
 
-*Add GIF showing movement and rendering*
+
+<img width="800" height="450" alt="raycaster" src="https://github.com/user-attachments/assets/8ad6491c-8bb1-42e6-81a3-798897af5bf7" />
+
+
+
 
 ---
 
