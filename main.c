@@ -23,12 +23,15 @@ int main(void){
     SDL_Renderer* renderer=SDL_CreateRenderer(window,-1,0);
     bool running=true;
     SDL_Event event;
+    SDL_Texture* seletex;
     SDL_Surface* surf=IMG_Load("backrooms.png");
     SDL_Texture* tex=SDL_CreateTextureFromSurface(renderer,surf);
     SDL_Surface* surfcar=IMG_Load("car.png");
     SDL_Texture* texcar=SDL_CreateTextureFromSurface(renderer,surfcar);
     SDL_Surface* whs=IMG_Load("wh.png");
     SDL_Texture* wht=SDL_CreateTextureFromSurface(renderer,whs);
+    SDL_SetTextureBlendMode(texcar,SDL_BLENDMODE_BLEND);
+    SDL_SetTextureBlendMode(wht,SDL_BLENDMODE_BLEND);
 
 
 
@@ -42,12 +45,13 @@ int main(void){
     int carw,carh;
     SDL_QueryTexture(tex, NULL, NULL, &carw, &carh);
     SDL_Rect rect={0,0,1280,720};
-    SDL_Rect wh={400,300,100,100};
+    SDL_Rect wh={110,480,580,400};
     int texw,texh;
     SDL_QueryTexture(tex, NULL, NULL, &texw, &texh);
     SDL_ShowCursor(SDL_DISABLE ); 
     SDL_SetRelativeMouseMode(SDL_TRUE); 
-
+    Uint32 lastMotionTime = 0;
+    seletex=wht;
     while (running){
         playercol=(int)playerx;
         playerrow=(int)playery;
@@ -100,8 +104,17 @@ int main(void){
 
                 }
             }else if (event.type==SDL_MOUSEMOTION){
-                
+                lastMotionTime = SDL_GetTicks();
                 playerangle+=event.motion.xrel*0.003;
+                if(event.motion.xrel<0){
+                    seletex=whlt;
+                    
+                }else if(event.motion.xrel>0) {
+                    seletex=whrt;
+
+                }else if(event.motion.xrel%1280==0){
+                seletex=wht;
+            }
                 
                 
 
@@ -111,9 +124,11 @@ int main(void){
             }
         
         }
+        if (SDL_GetTicks() - lastMotionTime > 65) { 
+        seletex = wht;  
+}
         SDL_SetRenderDrawColor(renderer,0,0,0,255);
         SDL_RenderClear(renderer);
-        
         for(int h=0;h<1280;h++){
 
             int mapx=(int)(playerx),mapy=(int)(playery);
@@ -176,7 +191,7 @@ int main(void){
             SDL_Rect rec={texx,0,1,texh};
             SDL_Rect dst={h,top,1,bottom-top};
             float brightness = 255.0f / (1.0f +d*d*2.0f);
-            SDL_SetTextureColorMod(tex,brightness,brightness,brightness);
+            SDL_SetTextureColorMod(tex,brightness+100,brightness+100,brightness+100);
             SDL_RenderCopy(renderer, tex, &rec, &dst);
             
             
@@ -215,7 +230,7 @@ int main(void){
 
         
         SDL_RenderCopy(renderer, texcar, &rect, NULL);
-        SDL_RenderCopy(renderer, wht, NULL, &wh);
+        SDL_RenderCopy(renderer, seletex, NULL, &wh);
         
 
         playercol=(int)playerx;
